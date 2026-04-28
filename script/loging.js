@@ -15,7 +15,7 @@ document.getElementById("login-btn").addEventListener("click",function () {
     if (Username === "admin" && Password === "admin123") {
         // 3.1- true alert :::> homepage
         alert('your are success')
-        window.location.assign("home.html")
+        window.location.assign("/Issue-Tracker/home.html")
     }
     //  3.2- false alert :::> return
     else{
