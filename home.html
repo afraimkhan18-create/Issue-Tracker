@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Issue-home</title>
+    <link
+      rel="shortcut icon"
+      href="./assets/Open-Status.png"
+      type="image/x-icon"
+    />
+
+    <!-- tailwind+daisy -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- font outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- font awesome  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      * {
+        font-family: "Outfit", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Navbar -->
+    <header
+      class="max-w-7xl mx-auto p-6 flex justify-between items-center border-b"
+    >
+      <div class="flex items-center gap-2">
+        <img src="./assets/Aperture.png" class="w-8" />
+        <h1 class="text-xl font-bold">GitHub Issues Tracker</h1>
+      </div>
+      <div class="flex gap-4 items-center">
+        <!-- Search -->
+        <div class="flex items-center rounded-xl px-4 py-2 gap-2 bg-gray-50">
+          <i class="fa-solid fa-magnifying-glass text-gray-400 text-sm"></i>
+          <input
+            type="text"
+            id="searchInput"
+            oninput="searchIssues(this.value)"
+            placeholder="Search issues..."
+            class="outline-none text-sm w-56 bg-transparent border-none"
+          />
+        </div>
+        <!-- New Issue Button -->
+        <button
+          class="btn btn-sm bg-[#422AD5] text-white border-none px-5 rounded-xl"
+        >
+          + New Issue
+        </button>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-6">
+      <!-- Filter Tabs -->
+      <div
+        id="tab-container"
+        class="flex gap-2 mb-8 bg-gray-50 p-2 rounded-xl w-fit"
+      >
+        <button
+          id="btn-all"
+          onclick="filterIssues('all')"
+          class="btn btn-sm bg-[#422AD5] text-white border-none px-5 rounded-xl"
+        >
+          All
+        </button>
+        <button
+          id="btn-open"
+          onclick="filterIssues('open')"
+          class="btn btn-sm bg-transparent text-gray-500 border-none px-5 rounded-xl"
+        >
+          Open
+        </button>
+        <button
+          id="btn-closed"
+          onclick="filterIssues('closed')"
+          class="btn btn-sm bg-transparent text-gray-500 border-none px-5 rounded-xl"
+        >
+          Closed
+        </button>
+      </div>
+
+      <!-- Issue Count Card -->
+      <div
+        class="flex items-center justify-between p-8 border rounded-3xl mb-10 shadow-sm"
+      >
+        <div class="flex items-center gap-4">
+          <div class="bg-purple-100 p-4 rounded-2xl">
+            <img src="./assets/Aperture.png" class="w-8" />
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold">
+              <span id="total-count">0</span> Issues
+            </h2>
+            <p class="text-sm text-gray-400">
+              Track and manage your project issues
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-6 text-sm font-semibold">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-green-500"></span> Open
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-purple-600"></span> Closed
+          </div>
+        </div>
+      </div>
+
+      <!-- Spinner -->
+      <div id="spinner" class="hidden text-center py-20">
+        <span class="loading loading-spinner loading-lg text-[#422AD5]"></span>
+      </div>
+
+      <!-- Issue Cards -->
+      <div
+        id="issue-container"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+      ></div>
+    </main>
+    <dialog id="my_modal_5" class="modal">
+      <div class="modal-box max-w-2xl rounded-[40px] p-10">
+        <div id="modal-content"></div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
+    </dialog>
+
+    <script src="./script/home.js"></script>
+  </body>
+</html>
